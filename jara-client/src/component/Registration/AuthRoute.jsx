@@ -1,40 +1,31 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import para from "../../constant/paraClient";
 
 const IDLE_TIMEOUT = 60 * 60 * 1000;
 
 const AuthRoute = ({ element }) => {
-  const navigate = useNavigate();
+  const isLoggedIn = para.isFullyLoggedIn();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      const isLoggedIn = await para.isFullyLoggedIn();
-      console.log(isLoggedIn);
-      if (!isLoggedIn) {
-        toast.info("Session expired. Please login again.");
-        navigate("/login");
-      }
-    };
-
-    checkAuth();
-  }, [navigate]);
+  if (!isLoggedIn) {
+    toast.info("Session expired. Please login again.");
+    return <Navigate to="/login" replace />;
+  }
 
   return element;
 };
 
 const IdleTimeout = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
+  let timeout;
 
   useEffect(() => {
-    let timeout;
-
     const resetTimer = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         para.logout();
-        navigate("/login");
+        window.location.href = "/login";
       }, IDLE_TIMEOUT);
     };
 
@@ -51,7 +42,7 @@ const IdleTimeout = () => {
       });
       clearTimeout(timeout);
     };
-  }, [navigate]);
+  }, [location]);
 
   return null;
 };

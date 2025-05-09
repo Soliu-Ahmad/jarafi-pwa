@@ -4,6 +4,7 @@ import { LuCreditCard, LuSettings2, LuWalletMinimal } from "react-icons/lu";
 import { RiTokenSwapLine } from "react-icons/ri";
 import { FundWithBalance, FundWithExternal } from "./FundingOption";
 import { IoIosArrowBack } from "react-icons/io";
+import { FaExchangeAlt } from "react-icons/fa";
 
 const FundCard = ({ onClose }) => {
   const [activeModal, setActiveModal] = useState("fundOptions");
@@ -114,32 +115,32 @@ const FundCard = ({ onClose }) => {
 };
 
 const FooterNav = ({ isActive }) => (
-  <footer className="fixed bottom-0 left-0 bg-white p-6 w-full h-[90px] flex items-center justify-evenly border-t border-gray-300">
-    <Link to="/dashboard">
-      <LuWalletMinimal
-        size={25}
-        color={isActive("/dashboard") ? "#0F0140" : "#B0AFB1"}
-      />
-    </Link>
-    <Link to="/p2p">
-      <RiTokenSwapLine
-        size={25}
-        color={isActive("/p2p") ? "#0F0140" : "#B0AFB1"}
-      />
-    </Link>
-    <Link to="/card-display">
-      <LuCreditCard
-        size={25}
-        color={isActive("/card-display") ? "#0F0140" : "#B0AFB1"}
-      />
-    </Link>
-    <Link to="/settings">
-      <LuSettings2
-        size={25}
-        color={isActive("/settings") ? "#0F0140" : "#B0AFB1"}
-      />
-    </Link>
-  </footer>
+  <footer className="fixed bottom-0 bg-white py-4 w-full  flex items-center justify-between px-[40px] md:px-[120px] border-t-[1px] border-[#B0AFB1]">
+          <Link to="/dashboard">
+            <LuWalletMinimal
+              size={25}
+              color={isActive("/dashboard") ? "#0F0140" : "#B0AFB1"}
+            />
+          </Link>
+          <Link to="/p2p">
+            <FaExchangeAlt
+              size={25}
+              color={isActive("/p2p") ? "#0F0140" : "#B0AFB1"}
+            />
+          </Link>
+          {/* <Link to="/card-display">
+            <LuCreditCard
+              size={25}
+              color={isActive("/card-display") ? "#0F0140" : "#B0AFB1"}
+            />
+          </Link> */}
+          <Link to="/settings">
+            <LuSettings2
+              size={25}
+              color={isActive("/settings") ? "#0F0140" : "#B0AFB1"}
+            />
+          </Link>
+        </footer>
 );
 
 export default FundCard;

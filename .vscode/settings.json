@@ -2,5 +2,7 @@
     "cSpell.words": [
         "Crossfi",
         "Jara"
-    ]
+    ],
+    "postman.settings.dotenv-detection-notification-visibility": false,
+    "editor.fontFamily": "Cascadia Code, Consolas, 'Courier New', monospace"
 }

@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-import {
-  cEUR,
-  cUsd,
-  cREAL,
-  celoToken,
-  commons,
-  cusdt,
-  USDC,
-} from "../../constant/otherChains";
+
 import { FaMinus, FaEquals, FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const tokens = [cEUR, cUsd, cREAL, celoToken, commons, cusdt, USDC];
 
 // FundWithBalance Component
 const FundWithBalance = ({ onClose }) => {
+  const [value, setValue] = useState(5);
+
+  const handleChange = (e) => {
+    const inputValue = e.target.value;
+    if (inputValue === "" || Number(inputValue) >= 5) {
+      setValue(inputValue);
+    }
+  };
+
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-xl w-full h-full relative">
       <div>

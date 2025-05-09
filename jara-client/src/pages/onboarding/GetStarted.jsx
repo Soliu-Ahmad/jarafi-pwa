@@ -9,9 +9,19 @@ const GetStarted = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setStartAnimation(true);
-    }, 5000);
+    }, 2000);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    // Prevent scrolling when component mounts
+    document.body.classList.add("overflow-hidden");
+
+    // Cleanup function to remove the class when component unmounts
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
   }, []);
 
   const handleNavigate = () => {
@@ -26,7 +36,7 @@ const GetStarted = () => {
         className="flex flex-col items-center gap-4 z-10"
         initial={{ opacity: 1, x: 0, y: 0 }}
         animate={startAnimation ? { opacity: 0, x: -500, y: -500 } : {}}
-        transition={{ duration: 6, ease: "easeIn" }}
+        transition={{ duration: 5, ease: "easeIn" }}
         onAnimationComplete={handleNavigate}
       >
         <img

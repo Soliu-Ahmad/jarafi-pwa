@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Lottie from "lottie-react";
+import SuccessAnimation from "../../../SuccessAnimation.json";
 
 const Congratulation = () => {
   const navigate = useNavigate();
@@ -22,11 +24,7 @@ const Congratulation = () => {
     <div className="min-h-screen bg-[#F8F4F1] flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-lg rounded-2xl shadow-lg p-8 space-y-6 text-center">
         <div className="flex flex-col items-center">
-          <img
-            src="/sic.png"
-            alt="Congratulations"
-            className="h-48 w-48 object-contain mb-6"
-          />
+          <Lottie animationData={SuccessAnimation} className="h-48 w-48 mb-6" />
 
           <h1 className="text-[28px] font-bold text-[#262526]">
             Congratulations!

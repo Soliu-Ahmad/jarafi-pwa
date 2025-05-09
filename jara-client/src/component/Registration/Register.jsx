@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ParaModal } from "@getpara/react-sdk";
 import para from "../../constant/paraClient";
@@ -10,21 +10,6 @@ const Register = () => {
   const [localError, setLocalError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // useEffect(() => {
-  //   const checkExistingLogin = async () => {
-  //     try {
-  //       const loggedIn = await para.isFullyLoggedIn();
-  //       if (loggedIn) {
-  //         navigate("/create-wallet");
-  //       }
-  //     } catch (error) {
-  //       console.error("Login check failed:", error);
-  //     }
-  //   };
-
-  //   checkExistingLogin();
-  // }, [navigate]);
-
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -33,17 +18,24 @@ const Register = () => {
     try {
       await para.logout();
       const isExistingUser = await para.checkIfUserExists({ email });
+      console.log(isExistingUser);
 
       if (isExistingUser) {
         const webAuthUrlForLogin = await para.initiateUserLogin({ email });
 
-        const popupWindow = window.open(webAuthUrlForLogin, "loginPopup", "popup=true,width=500,height=700");
+        const popupWindow = window.open(
+          webAuthUrlForLogin,
+          "loginPopup",
+          "popup=true,width=500,height=700"
+        );
 
         await para.waitForLoginAndSetup({ popupWindow });
 
         navigate("/dashboard");
       } else {
-        await para.createUser(email);
+
+        await para.createUser({email});
+
 
         navigate("/confirm-email", { state: { email } });
       }
@@ -73,15 +65,15 @@ const Register = () => {
           <p className="text-sm text-gray-600 mt-1">Hi, what's your email?</p>
         </div>
 
-        <form
-          onSubmit={handleEmailLogin}
-          className="space-y-4">
+        <form onSubmit={handleEmailLogin} className="space-y-4">
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700">
+              className="block text-sm font-medium text-gray-700"
+            >
               Email address
             </label>
+            
             <input
               id="email"
               type="email"
@@ -98,7 +90,8 @@ const Register = () => {
             disabled={isLoading}
             className={`w-full flex justify-center py-3 px-4 rounded-lg text-sm font-medium text-[#4F4E50] bg-[#F2E205] hover:bg-[#F7E353] focus:outline-none ${
               isLoading ? "opacity-50 cursor-not-allowed" : ""
-            }`}>
+            }`}
+          >
             {isLoading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
@@ -121,7 +114,8 @@ const Register = () => {
             onClick={handleGoogleLogin}
             className={`w-full flex items-center justify-center gap-2 px-4 py-3 border border-[#F2E205] rounded-lg bg-[#FFFEF7] text-sm font-medium text-gray-700 hover:bg-[#FFFEF0] focus:outline-none ${
               isLoading ? "opacity-50 cursor-not-allowed" : ""
-            }`}>
+            }`}
+          >
             {isLoading ? (
               <div className="w-5 h-5 border-2 border-gray-700 border-t-transparent rounded-full animate-spin" />
             ) : (
@@ -151,7 +145,11 @@ const Register = () => {
           />
         </div>
 
-        {localError && <div className="text-red-500 text-sm text-center mt-2">{localError}</div>}
+        {localError && (
+          <div className="text-red-500 text-sm text-center mt-2">
+            {localError}
+          </div>
+        )}
       </div>
     </div>
   );

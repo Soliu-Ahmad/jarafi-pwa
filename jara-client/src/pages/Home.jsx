@@ -1,12 +1,12 @@
-import React from 'react'
-import GetStarted from './onboarding/GetStarted'
+import React from "react";
+import GetStarted from "./onboarding/GetStarted";
 
 const Home = () => {
   return (
     <div>
-    <GetStarted/>
+      <GetStarted />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

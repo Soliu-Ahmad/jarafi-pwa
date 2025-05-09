@@ -6,6 +6,16 @@ const MainScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    // Prevent scrolling when component mounts
+    document.body.classList.add("overflow-hidden");
+
+    // Cleanup function to remove the class when component unmounts
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, []);
+
   const isActive = (path) => location.pathname === path;
 
   const imageVariants = {
@@ -132,7 +142,7 @@ const MainScreen = () => {
           </div>
 
           <motion.button
-            className="bg-[#F2E205] duration-300 py-3 px-8 text-[#4F4E50] max-w-sm rounded-lg text-lg font-medium shadow-lg w-[350px] hover:bg-[#e4d704] transition-transform transform "
+            className="bg-[#F2E205] duration-300 py-3 px-8 text-[#4F4E50] max-w-sm rounded-lg text-lg font-medium shadow-lg w-[350px] text-center hover:bg-[#e4d704] transition-transform transform "
             onClick={() => navigate("/trade-with-ease")}
           >
             Get Started

@@ -1,5 +1,4 @@
 import React from "react";
-import { cEUR, cUsd, cREAL, celoToken } from "../../constant/otherChains";
 
 const TokenModal = ({ isOpen, onClose, onSelect, tokens }) => {
   // console.log(tokens)
@@ -10,7 +9,7 @@ const TokenModal = ({ isOpen, onClose, onSelect, tokens }) => {
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
       <div className="bg-[#110F24] w-full max-w-md rounded-2xl">
         <div className="p-6 border-b border-[#2D2B54]">
-          <h2 className="text-white text-xl font-medium">Select Token</h2>
+          <h2 className="text-white text-xl font-medium">Select a Token</h2>
         </div>
         <div className="max-h-[60vh] overflow-y-auto p-4">
           {tokens.map((token) => (
@@ -29,7 +28,7 @@ const TokenModal = ({ isOpen, onClose, onSelect, tokens }) => {
               />
               <div>
                 <span className="text-white font-medium">
-                  {token.nativeCurrency.symbol}
+                  {token.symbol}
                 </span>
                 <p className="text-gray-400 text-sm">{token.name}</p>
               </div>
