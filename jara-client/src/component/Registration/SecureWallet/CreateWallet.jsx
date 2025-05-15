@@ -1,20 +1,24 @@
-import React, { useState } from "react";
-import Notice from "./Notice";
-import { useLocation } from "react-router-dom";
+import React, { useState } from 'react';
+import Notice from './Notice';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const CreateWallet = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const [email, setEmail] = useState(location.state?.email || "");
+  const [email, setEmail] = useState(location.state?.email || '');
 
-  // console.log(email);
   const handleModalOpen = () => {
     setIsOpen(true);
   };
 
   const handleModalClose = () => {
     setIsOpen(false);
+  };
+
+  const handleNavigate = () => {
+    navigate('/seedphrase?mode=recover');
   };
 
   return (
@@ -32,9 +36,9 @@ const CreateWallet = () => {
               Create wallet and encrypt seed phrase in your Google Drive.
             </h2>
 
-            <p className="text-[#F21B1B] text-[14px] ">
-              Note: If on the first try wallet creation failed, close and
-              restart your app.
+            <p className="text-[#F21B1B] text-[14px]">
+              Note: If on the first try wallet creation failed, close and restart
+              your app.
             </p>
           </div>
 
@@ -46,7 +50,10 @@ const CreateWallet = () => {
               Create wallet
             </button>
 
-            <button className="w-full bg-[#FCFEE8] py-3 px-4 rounded-xl text-gray-900 border-[#F2E205] border-[1.2px] font-medium hover:bg-[#f2e205e7] transition-colors">
+            <button
+              onClick={handleNavigate}
+              className="w-full bg-[#FCFEE8] py-3 px-4 rounded-xl text-gray-900 border-[#F2E205] border-[1.2px] font-medium hover:bg-[#f2e205e7] transition-colors"
+            >
               Have an existing wallet? Recover
             </button>
           </div>

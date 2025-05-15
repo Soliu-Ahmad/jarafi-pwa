@@ -30,3 +30,4 @@ export { default as SelectId } from "./component/kyc/SelectId";
 
 export { default as PinSetup } from "./pages/PinManagement/PinSetup";
 export { default as BankDetails } from "./component/P2P/BankDetails";
+export { default as SeedPhrase } from "./pages/SeedPhrase";
